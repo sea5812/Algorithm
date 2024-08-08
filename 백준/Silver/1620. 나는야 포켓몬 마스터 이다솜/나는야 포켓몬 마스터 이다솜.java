@@ -12,22 +12,22 @@ public class Main {
         int N = Integer.parseInt(input[0]);
         int M = Integer.parseInt(input[1]);
 
-        HashMap<Integer, String> hm1 = new HashMap<>();
-        HashMap<String, Integer> hm2 = new HashMap<>();
+        String[] numberToString = new String[N + 1];
+        HashMap<String, Integer> stringToNumber = new HashMap<>();
 
         for (int i = 1; i <= N; i++) {
             String name = br.readLine();
-            hm1.put(i, name);
-            hm2.put(name, i);
+            numberToString[i] = name;
+            stringToNumber.put(name, i);
         }
 
         for (int i = 1; i <= M; i++) {
             String query = br.readLine();
             if (isNumeric(query)) {
                 int number = Integer.parseInt(query);
-                sb.append(hm1.get(number)).append("\n");
+                sb.append(numberToString[number]).append("\n");
             } else {
-                sb.append(hm2.get(query)).append("\n");
+                sb.append(stringToNumber.get(query)).append("\n");
             }
         }
         System.out.println(sb);
