@@ -1,4 +1,4 @@
-# [Gold II] 컵라면 - 1781 (풀이 보고 품)
+# [Gold II] 컵라면 - 1781
 
 [문제 링크](https://www.acmicpc.net/problem/1781) 
 
