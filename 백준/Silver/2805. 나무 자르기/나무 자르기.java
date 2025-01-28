@@ -24,17 +24,18 @@ public class Main {
     }
 
     static int bSearch(int left, int right) {
-        while (left <= right) {
-            int mid = (left + right) / 2;
-            long tree = getTree(mid);
-
-            if (tree >= m) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
+        if (left > right) {
+            return right;
         }
-        return right;
+
+        int mid = (left + right) / 2;
+        long tree = getTree(mid);
+
+        if (tree >= m) {
+            return bSearch(mid + 1, right);
+        } else {
+            return bSearch(left, mid - 1);
+        }
     }
 
     static long getTree(int x) {
