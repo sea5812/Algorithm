@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -11,8 +9,8 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        Set<Integer> set = new HashSet<>();
         int n = Integer.parseInt(br.readLine());
+        int bitmask = 0;
 
         while (n-- > 0) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -21,24 +19,13 @@ public class Main {
             if (st.hasMoreTokens()) {
                 x = Integer.parseInt(st.nextToken());
             }
-
             switch (query) {
-                case "add" -> set.add(x);
-                case "remove" -> set.remove(x);
-                case "check" -> sb.append(set.contains(x) ? 1 : 0).append("\n");
-                case "toggle" -> {
-                    if (set.contains(x)) {
-                        set.remove(x);
-                    } else {
-                        set.add(x);
-                    }
-                }
-                case "all" -> {
-                    for (int i = 1; i <= 20; i++) {
-                        set.add(i);
-                    }
-                }
-                case "empty" -> set.clear();
+                case "add" -> bitmask |= 1 << (x - 1);
+                case "remove" -> bitmask &= ~(1 << (x - 1));
+                case "check" -> sb.append((bitmask & (1 << (x - 1))) != 0 ? 1 : 0).append("\n");
+                case "toggle" -> bitmask ^= (1 << (x - 1));
+                case "all" -> bitmask = (1 << 20) - 1;
+                case "empty" -> bitmask = 0;
             }
         }
         System.out.println(sb);
