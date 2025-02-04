@@ -10,17 +10,18 @@ public class Main {
         int m = Integer.parseInt(br.readLine());
         String s = br.readLine();
         int ans = 0;
+        int cnt = 0;
 
-        for (int i = 0; i < m; i++) {
-            if (s.charAt(i) == 'I') {
-                int j = 0;
-                for (j = 1; j < 2 * n + 1; j++) {
-                    if (i + j >= m) break;
-                    if (j % 2 == 1 && s.charAt(i + j) == 'O') continue;
-                    if (j % 2 == 0 && s.charAt(i + j) == 'I') continue;
-                    break;
+        for (int i = 1; i < m - 1; i++) {
+            if (s.charAt(i - 1) == 'I' && s.charAt(i) == 'O' && s.charAt(i + 1) == 'I') {
+                cnt++;
+                if (cnt == n) {
+                    cnt--;
+                    ans++;
                 }
-                if (j == 2 * n + 1) ans++;
+                i++;
+            } else {
+                cnt = 0;
             }
         }
         System.out.println(ans);
